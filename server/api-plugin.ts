@@ -49,7 +49,7 @@ function loadEnvFile() {
 
 loadEnvFile();
 
-const TEXT_MODEL = 'gemini-2.5-flash';
+const TEXT_MODEL = 'gemini-3.6-flash';
 const IMAGE_MODEL = 'gemini-3.1-flash-image';
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 

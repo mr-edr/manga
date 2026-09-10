@@ -48,7 +48,7 @@ export function SettingsPage({ project, apiConnected, onUpdateSettings }: Settin
           <div className="rounded-lg bg-black/30 border border-white/5 p-3">
             <div className="flex items-center justify-between">
               <span className="text-[13px] text-zinc-400">Text Model</span>
-              <span className="text-[12px] text-violet-300 font-medium">Gemini 2.5 Flash</span>
+              <span className="text-[12px] text-violet-300 font-medium">Gemini 3.6 Flash</span>
             </div>
           </div>
         </div>
