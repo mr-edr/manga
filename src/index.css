@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 30% 4%;
+    --foreground: 0 0% 95%;
+    --card: 260 25% 6%;
+    --card-foreground: 0 0% 95%;
+    --popover: 260 25% 7%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 260 20% 12%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 260 15% 14%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 258 60% 20%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 260 20% 14%;
+    --input: 260 20% 16%;
+    --ring: 258 90% 66%;
+    --radius: 0.75rem;
+
+    --chart-1: 258 90% 66%;
+    --chart-2: 220 70% 55%;
+    --chart-3: 160 60% 50%;
+    --chart-4: 30 80% 60%;
+    --chart-5: 340 75% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+  }
+}
