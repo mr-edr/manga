@@ -1,5 +1,7 @@
 import type { Plugin, ViteDevServer } from 'vite';
 import type { IncomingMessage, ServerResponse } from 'http';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 /**
  * Vite dev-server plugin that exposes secure backend API routes.
@@ -14,6 +16,38 @@ import type { IncomingMessage, ServerResponse } from 'http';
  *   POST /api/check-continuity — vision+text model: continuity report JSON
  *   POST /api/generate-image  — image model: generate manga panel image
  */
+
+/**
+ * Vite does NOT load .env into process.env for server-side plugin code.
+ * It only loads VITE_-prefixed vars into import.meta.env for the client.
+ * This manually parses .env and merges non-VITE_ vars into process.env
+ * so the API routes can access GEMINI_API_KEY.
+ */
+function loadEnvFile() {
+  try {
+    const envPath = resolve(process.cwd(), '.env');
+    const content = readFileSync(envPath, 'utf-8');
+    for (const line of content.split('\n')) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const eqIdx = trimmed.indexOf('=');
+      if (eqIdx === -1) continue;
+      const key = trimmed.slice(0, eqIdx).trim();
+      let value = trimmed.slice(eqIdx + 1).trim();
+      // Strip surrounding quotes
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      if (key && !(key in process.env)) {
+        process.env[key] = value;
+      }
+    }
+  } catch {
+    // .env file may not exist yet
+  }
+}
+
+loadEnvFile();
 
 const TEXT_MODEL = 'gemini-2.5-flash';
 const IMAGE_MODEL = 'gemini-3.1-flash-image';
